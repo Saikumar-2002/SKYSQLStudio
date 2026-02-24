@@ -1,0 +1,145 @@
+.attempt-page {
+    padding-bottom: $space-2xl;
+
+    &__loading,
+    &__not-found {
+        @include flex(column, center, center, $space-md);
+        padding: $space-3xl 0;
+        text-align: center;
+    }
+
+    &__back-link {
+        color: $color-accent-primary;
+        font-size: $font-size-base;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // Top bar
+    &__topbar {
+        @include flex(column, flex-start, flex-start, $space-sm);
+        margin-bottom: $space-lg;
+        padding-bottom: $space-md;
+        border-bottom: 1px solid $color-border;
+
+        @include respond-to('tablet') {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    &__back {
+        @include flex(row, flex-start, center, $space-2xs);
+        color: $color-text-muted;
+        font-size: $font-size-sm;
+        transition: color $transition-fast;
+
+        &:hover {
+            color: $color-accent-primary;
+        }
+    }
+
+    &__info {
+        @include flex(row, flex-start, center, $space-sm);
+        flex-wrap: wrap;
+    }
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+
+        @include respond-to('tablet') {
+            font-size: $font-size-xl;
+        }
+    }
+
+    &__badge {
+        padding: $space-2xs $space-sm;
+        border-radius: $radius-full;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+
+        &--easy {
+            background: rgba($color-easy, 0.12);
+            color: $color-easy;
+        }
+
+        &--medium {
+            background: rgba($color-medium, 0.12);
+            color: $color-medium;
+        }
+
+        &--hard {
+            background: rgba($color-error, 0.12);
+            color: $color-error;
+        }
+    }
+
+    // Layout
+    &__layout {
+        @include flex(column, flex-start, stretch, $space-lg);
+
+        @include respond-to('desktop') {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: $space-lg;
+            align-items: start;
+        }
+
+        @include respond-to('wide') {
+            grid-template-columns: 2fr 3fr;
+        }
+    }
+
+    &__left {
+        @include flex(column, flex-start, stretch, $space-md);
+    }
+
+    &__right {
+        @include flex(column, flex-start, stretch, $space-md);
+
+        @include respond-to('desktop') {
+            position: sticky;
+            top: 80px;
+        }
+    }
+
+    // Question
+    &__question {
+        @include card($space-md);
+    }
+
+    &__section-title {
+        @include flex(row, flex-start, center, $space-xs);
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+        color: $color-text-heading;
+        margin-bottom: $space-sm;
+
+        svg {
+            color: $color-accent-primary;
+        }
+    }
+
+    &__instructions {
+        color: $color-text-secondary;
+        font-size: $font-size-base;
+        line-height: 1.8;
+
+        code {
+            background: $color-bg-elevated;
+            padding: $space-2xs $space-xs;
+            border-radius: $radius-sm;
+            font-family: $font-family-mono;
+            font-size: $font-size-sm;
+            color: $color-accent-primary;
+        }
+    }
+
+    &__hint-wrap {
+        @include flex(row, flex-start, flex-start);
+    }
+}

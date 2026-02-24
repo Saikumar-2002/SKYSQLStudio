@@ -1,0 +1,258 @@
+// ============================================
+// SKYSQLStudio — SCSS Mixins
+// ============================================
+
+// --- Responsive Breakpoints (mobile-first) ---
+
+@use './variables' as *;
+
+@mixin respond-to($bp) {
+    @if $bp =='mobile' {
+        @media (min-width: $bp-mobile) {
+            @content;
+        }
+    }
+
+    @else if $bp =='tablet' {
+        @media (min-width: $bp-tablet) {
+            @content;
+        }
+    }
+
+    @else if $bp =='desktop' {
+        @media (min-width: $bp-desktop) {
+            @content;
+        }
+    }
+
+    @else if $bp =='wide' {
+        @media (min-width: $bp-wide) {
+            @content;
+        }
+    }
+}
+
+// --- Flexbox ---
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+
+    @if $gap !=0 {
+        gap: $gap;
+    }
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// --- Grid ---
+@mixin grid($columns: 1, $gap: $space-md) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+}
+
+// --- Glassmorphism ---
+@mixin glass($opacity: 0.1, $blur: 20px) {
+    background: rgba(255, 255, 255, $opacity);
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+// --- Gradient Text ---
+@mixin gradient-text($gradient: $color-accent-gradient) {
+    background: $gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+// --- Truncate text ---
+@mixin truncate($lines: 1) {
+    @if $lines ==1 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @else {
+        display: -webkit-box;
+        -webkit-line-clamp: $lines;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+// --- Card ---
+@mixin card($padding: $space-lg) {
+    background: $color-bg-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $padding;
+    transition: border-color $transition-base, box-shadow $transition-base, transform $transition-base;
+
+    &:hover {
+        border-color: $color-border-hover;
+        box-shadow: $shadow-md;
+    }
+}
+
+// --- Button base ---
+@mixin button-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-xs;
+    padding: $space-xs $space-md;
+    border: none;
+    border-radius: $radius-sm;
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-base;
+    text-decoration: none;
+    line-height: 1.5;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+// --- Button Primary ---
+@mixin button-primary {
+    @include button-base;
+    background: $color-accent-gradient;
+    color: white;
+    box-shadow: $shadow-sm, 0 0 0 0 $color-accent-glow;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: $shadow-md, 0 0 20px $color-accent-glow;
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+}
+
+// --- Button Secondary ---
+@mixin button-secondary {
+    @include button-base;
+    background: transparent;
+    color: $color-text-primary;
+    border: 1px solid $color-border;
+
+    &:hover:not(:disabled) {
+        background: $color-bg-hover;
+        border-color: $color-border-hover;
+    }
+}
+
+// --- Input ---
+@mixin input-base {
+    width: 100%;
+    padding: $space-sm $space-md;
+    background: $color-bg-input;
+    color: $color-text-primary;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+
+    &::placeholder {
+        color: $color-text-muted;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $color-accent-primary;
+        box-shadow: 0 0 0 3px $color-accent-glow;
+    }
+}
+
+// --- Scrollbar ---
+@mixin custom-scrollbar($width: 6px) {
+    &::-webkit-scrollbar {
+        width: $width;
+        height: $width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $color-border-hover;
+        border-radius: $radius-full;
+
+        &:hover {
+            background: $color-text-muted;
+        }
+    }
+}
+
+// --- Animation ---
+@mixin fade-in($duration: $transition-base, $delay: 0ms) {
+    animation: fadeIn $duration ease $delay both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

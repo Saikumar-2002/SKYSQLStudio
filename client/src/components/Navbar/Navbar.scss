@@ -1,0 +1,159 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: $z-sticky;
+    background: rgba($color-bg-primary, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid $color-border;
+
+    &__inner {
+        @include flex(row, space-between, center);
+        height: 64px;
+    }
+
+    &__brand {
+        @include flex(row, flex-start, center, $space-xs);
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+
+    &__logo {
+        @include flex-center;
+    }
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $color-text-heading;
+        letter-spacing: -0.02em;
+
+        &-accent {
+            @include gradient-text;
+        }
+    }
+
+    // Hamburger toggle
+    &__toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        padding: $space-xs;
+        cursor: pointer;
+
+        span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: $color-text-secondary;
+            border-radius: 2px;
+            transition: all $transition-base;
+        }
+
+        &--active {
+            span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            span:nth-child(2) {
+                opacity: 0;
+            }
+
+            span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+
+        @include respond-to('tablet') {
+            display: none;
+        }
+    }
+
+    // Menu
+    &__menu {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: $color-bg-secondary;
+        border-bottom: 1px solid $color-border;
+        padding: $space-md;
+        @include flex(column, flex-start, stretch, $space-sm);
+
+        &--open {
+            display: flex;
+        }
+
+        @include respond-to('tablet') {
+            display: flex;
+            position: static;
+            flex-direction: row;
+            align-items: center;
+            gap: $space-md;
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+    }
+
+    &__link {
+        color: $color-text-secondary;
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        padding: $space-xs $space-sm;
+        border-radius: $radius-sm;
+        transition: color $transition-fast, background $transition-fast;
+
+        &:hover {
+            color: $color-text-primary;
+            background: $color-bg-hover;
+        }
+
+        &--active {
+            color: $color-accent-primary;
+        }
+    }
+
+    &__auth {
+        @include flex(column, flex-start, stretch, $space-xs);
+
+        @include respond-to('tablet') {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    &__btn-signup {
+        @include button-primary;
+        padding: $space-xs $space-lg;
+        font-size: $font-size-sm;
+    }
+
+    &__user {
+        @include flex(row, flex-start, center, $space-xs);
+    }
+
+    &__avatar {
+        @include flex-center;
+        width: 32px;
+        height: 32px;
+        border-radius: $radius-full;
+        background: $color-accent-gradient;
+        color: white;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+    }
+
+    &__username {
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+    }
+
+    &__logout {
+        @include button-secondary;
+        padding: $space-2xs $space-sm;
+        font-size: $font-size-xs;
+    }
+}

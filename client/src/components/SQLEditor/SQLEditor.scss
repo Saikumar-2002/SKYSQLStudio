@@ -1,0 +1,65 @@
+.sql-editor {
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    overflow: hidden;
+    background: $color-bg-card;
+
+    &__header {
+        @include flex(row, space-between, center);
+        padding: $space-xs $space-md;
+        background: $color-bg-elevated;
+        border-bottom: 1px solid $color-border;
+        flex-wrap: wrap;
+        gap: $space-xs;
+    }
+
+    &__label {
+        @include flex(row, flex-start, center, $space-xs);
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+
+        svg {
+            color: $color-accent-primary;
+        }
+    }
+
+    &__actions {
+        @include flex(row, flex-end, center, $space-sm);
+    }
+
+    &__shortcut {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        font-family: $font-family-mono;
+        display: none;
+
+        @include respond-to('tablet') {
+            display: inline;
+        }
+    }
+
+    &__run-btn {
+        @include button-primary;
+        padding: $space-2xs $space-md;
+        font-size: $font-size-sm;
+        gap: $space-2xs;
+    }
+
+    &__spinner {
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+    }
+
+    &__body {
+
+        // Monaco editor container
+        .monaco-editor {
+            border-radius: 0;
+        }
+    }
+}

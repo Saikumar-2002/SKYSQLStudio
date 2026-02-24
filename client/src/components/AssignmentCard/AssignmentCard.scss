@@ -1,0 +1,107 @@
+.assignment-card {
+    @include card;
+    display: block;
+    text-decoration: none;
+    @include fade-in;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: $color-accent-gradient;
+        opacity: 0;
+        transition: opacity $transition-base;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-lg, $shadow-glow;
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &__header {
+        @include flex(row, space-between, center);
+        margin-bottom: $space-sm;
+    }
+
+    &__number {
+        font-family: $font-family-mono;
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        font-weight: $font-weight-medium;
+    }
+
+    &__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: $space-2xs;
+        padding: $space-2xs $space-sm;
+        border-radius: $radius-full;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        letter-spacing: 0.02em;
+
+        &--easy {
+            background: rgba($color-easy, 0.12);
+            color: $color-easy;
+        }
+
+        &--medium {
+            background: rgba($color-medium, 0.12);
+            color: $color-medium;
+        }
+
+        &--hard {
+            background: rgba($color-error, 0.12);
+            color: $color-error;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-md;
+        font-weight: $font-weight-semibold;
+        color: $color-text-heading;
+        margin-bottom: $space-xs;
+        line-height: 1.4;
+
+        @include respond-to('tablet') {
+            font-size: $font-size-lg;
+        }
+    }
+
+    &__desc {
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+        line-height: 1.6;
+        @include truncate(2);
+        margin-bottom: $space-md;
+    }
+
+    &__footer {
+        @include flex(row, flex-end, center);
+    }
+
+    &__cta {
+        @include flex(row, flex-start, center, $space-2xs);
+        color: $color-accent-primary;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        transition: gap $transition-base;
+
+        svg {
+            transition: transform $transition-base;
+        }
+    }
+
+    &:hover &__cta svg {
+        transform: translateX(3px);
+    }
+}

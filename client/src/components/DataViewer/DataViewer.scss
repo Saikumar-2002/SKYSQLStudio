@@ -1,0 +1,135 @@
+.data-viewer {
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background: $color-bg-card;
+    overflow: hidden;
+
+    &--empty {
+        padding: $space-lg;
+        color: $color-text-muted;
+        text-align: center;
+        font-size: $font-size-sm;
+    }
+
+    &__header {
+        @include flex(row, flex-start, center, $space-xs);
+        padding: $space-xs $space-md;
+        background: $color-bg-elevated;
+        border-bottom: 1px solid $color-border;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+
+        svg {
+            color: $color-accent-secondary;
+        }
+    }
+
+    &__tabs {
+        @include flex(row, flex-start, center);
+        border-bottom: 1px solid $color-border;
+        padding: 0 $space-sm;
+        overflow-x: auto;
+        @include custom-scrollbar(4px);
+    }
+
+    &__tab {
+        @include button-base;
+        background: transparent;
+        color: $color-text-muted;
+        padding: $space-xs $space-md;
+        border-bottom: 2px solid transparent;
+        border-radius: 0;
+        font-size: $font-size-sm;
+        font-family: $font-family-mono;
+        white-space: nowrap;
+
+        &:hover {
+            color: $color-text-primary;
+        }
+
+        &--active {
+            color: $color-accent-primary;
+            border-bottom-color: $color-accent-primary;
+        }
+    }
+
+    &__content {
+        padding: $space-sm;
+        max-height: 350px;
+        overflow-y: auto;
+        @include custom-scrollbar;
+    }
+
+    &__schema {
+        margin-bottom: $space-sm;
+    }
+
+    &__table-name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-text-heading;
+        margin-bottom: $space-xs;
+    }
+
+    &__columns {
+        @include flex(row, flex-start, center);
+        flex-wrap: wrap;
+        gap: $space-xs;
+        margin-bottom: $space-sm;
+    }
+
+    &__column {
+        @include flex(row, flex-start, center, $space-2xs);
+        background: $color-bg-elevated;
+        padding: $space-2xs $space-xs;
+        border-radius: $radius-sm;
+        font-size: $font-size-xs;
+    }
+
+    &__col-name {
+        color: $color-accent-primary;
+        font-family: $font-family-mono;
+        font-weight: $font-weight-medium;
+    }
+
+    &__col-type {
+        color: $color-text-muted;
+        font-family: $font-family-mono;
+    }
+
+    &__table-wrap {
+        overflow-x: auto;
+        @include custom-scrollbar(4px);
+    }
+
+    &__table {
+        width: 100%;
+        font-size: $font-size-xs;
+        font-family: $font-family-mono;
+
+        th,
+        td {
+            padding: $space-2xs $space-xs;
+            text-align: left;
+            white-space: nowrap;
+            border-bottom: 1px solid $color-border;
+        }
+
+        th {
+            color: $color-text-secondary;
+            font-weight: $font-weight-semibold;
+            background: $color-bg-elevated;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            color: $color-text-primary;
+        }
+
+        tr:hover td {
+            background: rgba($color-accent-primary, 0.04);
+        }
+    }
+}
